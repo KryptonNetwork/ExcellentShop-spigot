@@ -14,8 +14,6 @@ import su.nightexpress.nexshop.api.shop.type.TradeType;
 import su.nightexpress.nexshop.config.Config;
 import su.nightexpress.nexshop.config.Lang;
 import su.nightexpress.nexshop.config.Perms;
-import su.nightexpress.nexshop.shop.chest.ChestShopModule;
-import su.nightexpress.nexshop.shop.chest.impl.ChestShop;
 import su.nightexpress.nexshop.shop.menu.*;
 import su.nightexpress.nexshop.shop.virtual.VirtualShopModule;
 import su.nightexpress.nexshop.util.ShopUtils;
@@ -109,11 +107,6 @@ public class ShopManager extends AbstractManager<ShopPlugin> {
             shops.addAll(virtualShopModule.getShops());
         }
 
-        ChestShopModule chestShopModule = plugin.getChestShop();
-        if (chestShopModule != null) {
-            shops.addAll(chestShopModule.lookup().getAll());
-        }
-
         return shops;
     }
 
@@ -198,10 +191,7 @@ public class ShopManager extends AbstractManager<ShopPlugin> {
                 msgStock = Lang.SHOP_PRODUCT_ERROR_OUT_OF_STOCK;
             }
             else {
-                if (shop instanceof ChestShop) {
-                    msgStock = Lang.SHOP_PRODUCT_ERROR_OUT_OF_SPACE;
-                }
-                else msgStock = Lang.SHOP_PRODUCT_ERROR_FULL_STOCK;
+                msgStock = Lang.SHOP_PRODUCT_ERROR_FULL_STOCK;
             }
             msgStock.getMessage().send(player);
             return false;

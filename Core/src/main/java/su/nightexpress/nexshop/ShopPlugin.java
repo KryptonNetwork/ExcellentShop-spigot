@@ -3,7 +3,6 @@ package su.nightexpress.nexshop;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.nightexpress.nexshop.api.module.Module;
-import su.nightexpress.nexshop.auction.AuctionManager;
 import su.nightexpress.nexshop.config.Config;
 import su.nightexpress.nexshop.config.Keys;
 import su.nightexpress.nexshop.config.Lang;
@@ -15,8 +14,6 @@ import su.nightexpress.nexshop.hook.PlaceholderHook;
 import su.nightexpress.nexshop.module.ModuleId;
 import su.nightexpress.nexshop.module.ModuleLoaders;
 import su.nightexpress.nexshop.shop.ShopManager;
-import su.nightexpress.nexshop.shop.chest.ChestShopModule;
-import su.nightexpress.nexshop.shop.chest.compatibility.WorldGuardFlags;
 import su.nightexpress.nexshop.shop.virtual.VirtualShopModule;
 import su.nightexpress.nexshop.user.UserManager;
 import su.nightexpress.nightcore.NightPlugin;
@@ -54,9 +51,6 @@ public class ShopPlugin extends NightPlugin implements ImprovedCommands {
     @Override
     public void onLoad() {
         super.onLoad();
-        if (this.getServer().getPluginManager().getPlugin(HookId.WORLD_GUARD) != null) {
-            WorldGuardFlags.setupFlag();
-        }
     }
 
     @Override
@@ -166,16 +160,6 @@ public class ShopPlugin extends NightPlugin implements ImprovedCommands {
     @Nullable
     public VirtualShopModule getVirtualShop() {
         return this.getModule(VirtualShopModule.class).orElse(null);
-    }
-
-    @Nullable
-    public ChestShopModule getChestShop() {
-        return this.getModule(ChestShopModule.class).orElse(null);
-    }
-
-    @Nullable
-    public AuctionManager getAuction() {
-        return this.getModule(AuctionManager.class).orElse(null);
     }
 
     @NotNull

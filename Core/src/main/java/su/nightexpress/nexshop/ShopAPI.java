@@ -4,8 +4,6 @@ import org.jetbrains.annotations.NotNull;
 import su.nightexpress.nexshop.data.DataHandler;
 import su.nightexpress.nexshop.data.DataManager;
 import su.nightexpress.nexshop.user.UserManager;
-import su.nightexpress.nexshop.auction.AuctionManager;
-import su.nightexpress.nexshop.shop.chest.ChestShopModule;
 import su.nightexpress.nexshop.shop.virtual.VirtualShopModule;
 
 public class ShopAPI {
@@ -41,16 +39,8 @@ public class ShopAPI {
         return plugin.getDataManager();
     }
 
-    public static AuctionManager getAuctionManager() {
-        return plugin.getAuction();
-    }
-
     public static VirtualShopModule getVirtualShop() {
         return plugin.getVirtualShop();
-    }
-
-    public static ChestShopModule getChestShop() {
-        return plugin.getChestShop();
     }
 
     @NotNull

@@ -8,7 +8,6 @@ import su.nightexpress.nexshop.data.legacy.LegacyStockData;
 import su.nightexpress.nexshop.data.product.PriceData;
 import su.nightexpress.nexshop.data.product.StockData;
 import su.nightexpress.nexshop.data.shop.RotationData;
-import su.nightexpress.nexshop.shop.chest.impl.ChestBank;
 import su.nightexpress.nexshop.shop.virtual.impl.Rotation;
 import su.nightexpress.nexshop.shop.virtual.impl.VirtualShop;
 import su.nightexpress.nightcore.db.sql.query.impl.DeleteQuery;
@@ -154,39 +153,4 @@ public class DataQueries {
     public static final DeleteQuery<VirtualShop> ROTATION_DATA_DELETE_BY_SHOP = new DeleteQuery<VirtualShop>()
         .whereIgnoreCase(DataHandler.COLUMN_GEN_SHOP_ID, WhereOperator.EQUAL, Shop::getId);
 
-
-
-    public static final Function<ResultSet, ChestBank> CHEST_BANK_LOADER = resultSet -> {
-        try {
-            UUID holder = UUID.fromString(resultSet.getString(DataHandler.COLUMN_BANK_HOLDER.getName()));
-
-            Map<String, Double> balanceRaw = DataHandler.GSON.fromJson(resultSet.getString(DataHandler.COLUMN_BANK_BALANCE.getName()), new TypeToken<Map<String, Double>>(){}.getType());
-            if (balanceRaw == null) balanceRaw = new HashMap<>();
-
-//            Map<Currency, Double> balanceMap = new HashMap<>();
-//            balanceRaw.forEach((id, amount) -> {
-//                Currency currency = EconomyBridge.getCurrency(CurrencyId.reroute(id));
-//                if (currency == null) return;
-//
-//                balanceMap.put(currency, amount);
-//            });
-
-            return new ChestBank(holder, balanceRaw);
-        }
-        catch (SQLException exception) {
-            exception.printStackTrace();
-            return null;
-        }
-    };
-
-    public static final InsertQuery<ChestBank> CHEST_BANK_INSERT = new InsertQuery<ChestBank>()
-        .setValue(DataHandler.COLUMN_BANK_HOLDER, bank -> bank.getHolder().toString())
-        .setValue(DataHandler.COLUMN_BANK_BALANCE, bank -> DataHandler.GSON.toJson(bank.getBalanceMap()));
-
-    public static final UpdateQuery<ChestBank> CHEST_BANK_UPDATE = new UpdateQuery<ChestBank>()
-        .setValue(DataHandler.COLUMN_BANK_BALANCE, bank -> DataHandler.GSON.toJson(bank.getBalanceMap()))
-        .whereIgnoreCase(DataHandler.COLUMN_BANK_HOLDER, WhereOperator.EQUAL, bank -> bank.getHolder().toString());
-
-    public static final DeleteQuery<ChestBank> CHEST_BANK_DELETE_BY_SELF = new DeleteQuery<ChestBank>()
-        .whereIgnoreCase(DataHandler.COLUMN_BANK_HOLDER, WhereOperator.EQUAL, bank -> bank.getHolder().toString());
 }

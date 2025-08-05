@@ -18,7 +18,6 @@ import su.nightexpress.nexshop.api.shop.product.typing.PhysicalTyping;
 import su.nightexpress.nexshop.api.shop.type.TradeType;
 import su.nightexpress.nexshop.config.Config;
 import su.nightexpress.nexshop.config.Lang;
-import su.nightexpress.nexshop.shop.chest.impl.ChestShop;
 import su.nightexpress.nightcore.config.ConfigValue;
 import su.nightexpress.nightcore.config.FileConfig;
 import su.nightexpress.nightcore.ui.dialog.Dialog;
@@ -76,7 +75,7 @@ public class CartMenu extends LinkedMenu<ShopPlugin, Breadcumb<PreparedProduct>>
         int capacityInventory = Integer.MAX_VALUE;
         int capacityCart = this.getCartInventorySpace(prepared);
         int capacityProduct = product.getAvailableAmount(player, prepared.getTradeType());
-        double shopBalance = shop instanceof ChestShop chestShop ? chestShop.getBalance(product.getCurrency()) : -1D;
+        double shopBalance = -1D;
         double userBalance = product.getCurrency().getBalance(player);
 
         if (product.getType() instanceof PhysicalTyping itemPacker) {

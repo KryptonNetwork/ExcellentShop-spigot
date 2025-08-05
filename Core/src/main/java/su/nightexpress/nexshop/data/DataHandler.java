@@ -16,8 +16,6 @@ import su.nightexpress.nexshop.data.legacy.LegacyStockData;
 import su.nightexpress.nexshop.data.product.PriceData;
 import su.nightexpress.nexshop.data.product.StockData;
 import su.nightexpress.nexshop.data.shop.RotationData;
-import su.nightexpress.nexshop.shop.chest.ChestShopModule;
-import su.nightexpress.nexshop.shop.chest.impl.ChestBank;
 import su.nightexpress.nexshop.shop.virtual.impl.Rotation;
 import su.nightexpress.nexshop.shop.virtual.impl.VirtualProduct;
 import su.nightexpress.nexshop.shop.virtual.impl.VirtualShop;
@@ -151,12 +149,6 @@ public class DataHandler extends AbstractUserDataManager<ShopPlugin, ShopUser> {
     @Override
     public void onSynchronize() {
         this.plugin.getDataManager().handleSynchronization();
-
-        ChestShopModule module = this.plugin.getChestShop();
-        if (module != null) {
-            module.getBankMap().clear();
-            module.loadBanks();
-        }
     }
 
     public void updateStockDatas() {
@@ -330,19 +322,4 @@ public class DataHandler extends AbstractUserDataManager<ShopPlugin, ShopUser> {
         this.delete(this.tablePriceData, query, products);
     }
 
-
-
-
-    @NotNull
-    public List<ChestBank> loadChestBanks() {
-        return this.select(this.tableChestBank, DataQueries.CHEST_BANK_LOADER, SelectQuery::all);
-    }
-
-    public void createChestBank(@NotNull ChestBank bank) {
-        this.insert(this.tableChestBank, DataQueries.CHEST_BANK_INSERT, bank);
-    }
-
-    public void saveChestBank(@NotNull ChestBank bank) {
-        this.update(this.tableChestBank, DataQueries.CHEST_BANK_UPDATE, bank);
-    }
 }

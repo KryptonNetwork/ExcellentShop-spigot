@@ -6,7 +6,6 @@ import su.nightexpress.nexshop.Placeholders;
 import su.nightexpress.nexshop.api.module.Module;
 import su.nightexpress.nexshop.api.shop.event.ShopTransactionEvent;
 import su.nightexpress.nexshop.api.shop.product.Product;
-import su.nightexpress.nexshop.shop.chest.ChestShopModule;
 import su.nightexpress.nightcore.config.ConfigValue;
 import su.nightexpress.nightcore.config.FileConfig;
 import su.nightexpress.nightcore.util.text.NightMessage;
@@ -45,9 +44,6 @@ public class TransactionLogger {
 
         // TODO Module method or in constructor?
         String defaultFormat = GENERIC_TYPE + ": " + PLAYER_NAME + " - x" + GENERIC_AMOUNT + " of " + GENERIC_ITEM + " for " + GENERIC_PRICE + " in " + SHOP_NAME + " shop.";
-        if (module instanceof ChestShopModule) {
-            defaultFormat += " [" + CHEST_SHOP_X + ", " + CHEST_SHOP_Y + ", " + CHEST_SHOP_Z + " in " + CHEST_SHOP_WORLD + ", owned by " + CHEST_SHOP_OWNER + "]";
-        }
 
         this.format = ConfigValue.create(path + "Format.Purchase", defaultFormat).read(config).replace("%player%", Placeholders.PLAYER_NAME);
     }

@@ -4,8 +4,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.nightexpress.nexshop.ShopPlugin;
 import su.nightexpress.nexshop.api.module.Module;
-import su.nightexpress.nexshop.auction.AuctionManager;
-import su.nightexpress.nexshop.shop.chest.ChestShopModule;
 import su.nightexpress.nexshop.shop.virtual.VirtualShopModule;
 
 import java.util.HashMap;
@@ -16,8 +14,6 @@ public class ModuleLoaders {
     private static final Map<String, Loader<?>> LOADER_MAP = new HashMap<>();
 
     public static void load() {
-        addLoader(ModuleId.AUCTION, AuctionManager::new);
-        addLoader(ModuleId.CHEST_SHOP, ChestShopModule::new);
         addLoader(ModuleId.VIRTUAL_SHOP, VirtualShopModule::new);
     }
 
