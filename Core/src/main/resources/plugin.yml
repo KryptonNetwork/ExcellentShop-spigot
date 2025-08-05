@@ -23,4 +23,5 @@ softdepend:
   - MMOItems
   - ExcellentCrates
   - VotingPlugin
+  - DonutWorth
 api-version: 1.18

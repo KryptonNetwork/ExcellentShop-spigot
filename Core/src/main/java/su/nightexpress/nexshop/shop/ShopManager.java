@@ -1,6 +1,9 @@
 package su.nightexpress.nexshop.shop;
 
+import me.serbob.donutworth.api.event.ShopRegistrationCompleteEvent;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,6 +17,7 @@ import su.nightexpress.nexshop.api.shop.type.TradeType;
 import su.nightexpress.nexshop.config.Config;
 import su.nightexpress.nexshop.config.Lang;
 import su.nightexpress.nexshop.config.Perms;
+import su.nightexpress.nexshop.hook.DonutWorthHook;
 import su.nightexpress.nexshop.shop.menu.*;
 import su.nightexpress.nexshop.shop.virtual.VirtualShopModule;
 import su.nightexpress.nexshop.util.ShopUtils;
@@ -51,6 +55,14 @@ public class ShopManager extends AbstractManager<ShopPlugin> {
         this.addTask(this::updateShops, Config.SHOP_UPDATE_INTERVAL.get());
 
         this.plugin.runTaskLater(task -> this.printBadProducts(), 100L);
+
+        this.plugin.getServer().getPluginManager().registerEvents(new Listener() {
+            @EventHandler
+            public void onLoad(ShopRegistrationCompleteEvent event) {
+                me.serbob.donutworth.api.shop.ShopManager manager = me.serbob.donutworth.api.shop.ShopManager.getInstance();
+                manager.registerShop(new DonutWorthHook(plugin));
+            }
+        }, this.plugin);
     }
 
     @Override

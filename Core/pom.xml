@@ -127,6 +127,14 @@
             <version>1.16.8.1.1</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>me.serbob</groupId>
+            <artifactId>donutworth</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/DonutWorth-1.5.1-rc-11.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
