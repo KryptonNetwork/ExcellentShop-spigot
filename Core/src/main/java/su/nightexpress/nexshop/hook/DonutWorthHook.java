@@ -31,6 +31,8 @@ public class DonutWorthHook implements ShopHook {
     public double getSellPrice(Material material) {
         VirtualProduct product = plugin.getVirtualShop().getBestProductFor(new ItemStack(material), TradeType.SELL);
         if (product == null) return -1;
+        if (!product.isSellable()) return -1;
+        if (product.getCurrency().getName().equalsIgnoreCase("kriptonit")) return -1;
 
         return product.getPrice(TradeType.SELL);
     }
@@ -39,6 +41,8 @@ public class DonutWorthHook implements ShopHook {
     public double getSellPrice(Player player, Material material) {
         VirtualProduct product = plugin.getVirtualShop().getBestProductFor(new ItemStack(material), TradeType.SELL);
         if (product == null) return -1;
+        if (!product.isSellable()) return -1;
+        if (product.getCurrency().getName().equalsIgnoreCase("kriptonit")) return -1;
 
         return product.getPrice(TradeType.SELL, player);
     }
