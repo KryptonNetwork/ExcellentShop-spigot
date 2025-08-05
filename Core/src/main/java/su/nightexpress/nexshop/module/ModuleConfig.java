@@ -34,8 +34,6 @@ public class ModuleConfig implements Writeable {
     public static Map<String, ModuleConfig> getDefaultConfigs() {
         Map<String, ModuleConfig> map = new LinkedHashMap<>();
 
-        map.put(ModuleId.AUCTION, createDefault("Auction", "auction", "auc", "ah"));
-        map.put(ModuleId.CHEST_SHOP, createDefault("ChestShop", "chestshop", "cshop", "playershop", "pshop"));
         map.put(ModuleId.VIRTUAL_SHOP, createDefault("Shop", "virtualshop", "vshop"));
 
         return map;
